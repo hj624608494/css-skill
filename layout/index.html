@@ -1,0 +1,251 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>Html与CSS布局技巧</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <style>
+        *{margin: 0;padding: 0;}
+        img{display: block;border: 0;}
+        li{list-style: none;}
+        a{text-decoration: none;}
+
+        .ui-container{
+            max-width: 750px;
+            min-width: 320px;
+            margin: 0 auto;
+            padding: 0 10px;
+            overflow: hidden;
+        }
+        .ui-container > section > header{
+            width: 100%;
+            height: 36px;
+            line-height: 36px;
+            text-indent: 10px;
+            color: #fff;
+            background: #F96E57;
+        }
+        .ui-container > section > .title-big{
+            margin: 10px 0;
+            padding: 5px;
+            border: 1px dashed #F96E57;;
+        }
+
+        .realize{
+            margin: 20px 0;
+            padding-left: 5px;
+            border-left: 2px solid #F96E57;
+        }
+        .realize p:first-child{
+            font-weight: bold;
+        }       
+        .realize-test{
+            height:30px;
+            width: 50%;
+            line-height: 30px;
+            background: #F96E57;
+            border-radius: 4px;
+            color: #fff;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="ui-container">
+        <!-- 单列布局 -->
+        <section class="oneline-layout">
+            <header>单列布局</header>
+            
+            <!-- 水平居中 -->
+            <div class="title-big">
+                <p>水平居中</p>
+                <p>水平居中的页面布局中最为常见的一种布局形式，多出现于标题，以及内容区域的组织形式，下面介绍四种实现水平居中的方法（注：下面各个实例中实现的是child元素的对齐操作，child元素的父容器是parent元素）</p>
+            </div>
+
+            <div class="realize">
+                <p>1.使用inline-block 和 text-align实现</p>
+                <p>.parent{text-align: center;}</p>
+                <p>.child{display: inline-block;}</p>
+                <p>效果:</p>
+                <div style="text-align: center;">
+                    <div class="realize-test" style="display: inline-block;">水平居中</div>
+                </div>
+                <p>优点：兼容性好；</p>
+                <p>不足：需要同时设置子元素和父元素</p>
+            </div>
+
+            <div class="realize">
+                <p>2.使用margin:0 auto来实现</p>
+                <p>.child{width:200px;margin:0 auto;}</p>
+                <p>效果:</p>
+                <div class="realize-test" style="width:200px;margin:0 auto;">水平居中</div>
+                <p>优点：兼容性好；</p>
+                <p>缺点: 需要指定宽度</p>
+            </div>
+
+            <div class="realize">
+                <p>3.使用table实现</p>
+                <p>.child{display:table; margin: 0 auto;}</p>
+                <p>效果:</p>
+                <div class="realize-test" style="display:table; margin: 0 auto;">水平居中</div>
+                <p>优点:只需要对自身进行设置</p>
+                <p>不足:IE6,7需要调整结构</p>
+            </div>
+
+            <div class="realize">
+                <p>4.使用绝对定位实现</p>
+                <p>.parent{position: relative;}</p>
+                <p>.child{position: absolute; left: 50%; transform: translate(-50%);}</p>
+                <p>效果:</p>
+                <div style="position: relative; height: 50px;">
+                    <div class="realize-test" style="position: absolute; left: 50%; transform: translate(-50%);">水平居中</div>
+                </div>
+                <p>或者使用margin-left的负值为盒子宽度的一半也可以实现，不过这样就必须知道盒子的宽度，但兼容性好</p>
+                <p>不足：transform兼容性差,IE9及以上可用</p>
+            </div>
+
+            <div class="realize">
+                <p>5.实用flex布局实现</p>
+                <p>/*第一种方法*/</p>
+                <p>.parent{display: flex; justify-content: center;}</p>
+                <p>效果:</p>
+                <div style="display: flex; justify-content: center;">
+                    <div class="realize-test">水平居中</div>
+                </div>
+                <p>/*第二种方法*/</p>
+                <p>.parent{display: flex;}</p>
+                <p>.child{margin: 0 auto;}</p>
+                <p>效果:</p>
+                <div style="display: flex;">
+                    <div class="realize-test" style="margin: 0 auto;">水平居中</div>
+                </div>
+                <p>缺点：兼容性差，如果进行大面积的布局可能会影响效率</p>
+            </div>
+            
+            <!-- 垂直居中 -->
+            <div class="title-big">
+                <p>垂直居中</p>
+                <p>下面介绍三种实现垂直居中的方法</p>
+            </div>
+
+            <div class="realize">
+                <p>1.实用vertical-align实现</p>
+                <p>/*第一种方法*/</p>
+                <p>.parent{display: table-cell; vertical-align: middle; height: 50px;}</p>
+                <p>效果:</p>
+                <div style="display: table-cell; vertical-align: middle; height: 50px; background: #e8e8e8; width:200px;">
+                    <div class="realize-test">垂直居中</div>
+                </div>
+                <p>/*第二种方法*/</p>
+                <p>.parent{display: inline-block; vertical-align: middle; line-height: 50px;}</p>
+                <p>效果:</p>
+                <div style="display: inline-block; vertical-align: middle; line-height:50px; background: #e8e8e8; width:200px;">
+                    <div class="realize-test">垂直居中</div>
+                </div>
+            </div>
+
+            <div class="realize">
+                <p>2.使用绝对定位实现</p>
+                <p>.parent{position: relative;}</p>
+                <p>.child{position: absolute; top: 50%; transform: translate(0,-50%);}</p>
+                <p>效果:</p>
+                <div style="position: relative; height: 50px; background: #e8e8e8;">
+                    <div class="realize-test" style="position: absolute; top: 50%; transform: translate(0,-50%);">垂直居中</div>
+                </div>
+            </div>
+
+            <div class="realize">
+                <p>3.实用flex实现</p>
+                <p>.parent{display:flex;align-items:center;}</p>
+                <p>效果:</p>
+                <div style="display:flex;align-items:center; height: 50px; background: #e8e8e8;">
+                    <div class="realize-test">垂直居中</div>
+                </div>
+            </div>
+
+            <!-- 水平垂直全部居中 -->
+            <div class="title-big">
+                <p>水平垂直居中</p>
+                <p>下面介绍三种实现水平垂直居中的方法</p>
+            </div>
+
+            <div class="realize">
+                <p>1.利用vertical-align,text-align,inline-block实现</p>
+                <p>.parent{display: table-cell; vertical-align: middle; text-align:center;}</p>
+                <p>.child{display: inline-block;}</p>
+                <p>效果:</p>
+                <div style="display: table-cell; vertical-align: middle; text-align: center; width:300px; height: 50px; background: #e8e8e8;">
+                    <div class="realize-test" style="display: inline-block;">水平垂直居中</div>
+                </div>
+            </div>
+
+            <div class="realize">
+                <p>2.利用绝对定位实现</p>
+                <p>.parent{position: relative;}</p>
+                <p>.child{position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); /*或者margin-left: -50%; margin-top: 50%;*/}</p>
+                <p>效果:</p>
+                <div style="position:relative; width:100%; height: 50px; background: #e8e8e8;">
+                    <div class="realize-test" style="position: absolute; top:50%; left:50%; transform: translate(-50%, -50%)">水平垂直居中</div>
+                </div>
+            </div>
+
+            <div class="realize">
+                <p>3.利用flex实现</p>
+                <p>.parent{display: flex; justify-content: center; align-items: center;}</p>
+                <p>效果:</p>
+                <div style="display:flex; justify-content: center; align-items:center; width:100%; height: 50px; background: #e8e8e8;">
+                    <div class="realize-test">水平垂直居中</div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- 多列布局 -->
+        <section class="multi-layout">
+            <header>多列布局</header>
+            
+            <div class="title-big">
+                <p>左列定宽，右列自适应</p>
+                <p>该布局方式非常常见，适用于定宽的一侧常为导航，自适应的一侧为内容的布局</p>
+            </div>
+
+            <div class="realize">
+                <p>1.利用float+margin实现</p>
+                <p>.left{width:100px; float:left;}</p>
+                <p>.right{margin-left: 110px;}</p>
+                <p>效果:</p>
+
+                <div style="width:100%;">
+                    <div style="width:100px;height:100px;float:left;background: #333;"></div>
+                    <div style="margin-left: 110px;height:100px; background:#ccc;"></div>
+                </div>
+            </div>
+
+            <div class="realize">
+                <p>2.使用table实现</p>
+                <p>.parent{display: table; table-layout: fixed; width: 100%;}</p>
+                <p>.left{width:100px;} .left,.right{display: table-cell;}</p>
+                <p>效果:</p>
+
+                <div style="display: table; table-layout: fixed; width:100%;">
+                    <div style="width:100px; display: table-cell; height:100px;background: #333;"></div>
+                    <div style="display: table-cell; height:100px; background:#ccc;"></div>
+                </div>
+            </div>
+
+            <div class="realize">
+                <p>3.实用flex实现</p>
+                <p>.parent{display: flex;}</p>
+                <p>.left{width:100px;} .right{flex:1;}</p>
+                <p>效果:</p>
+
+                <div style="display: flex;">
+                    <div style="width:100px; height:100px;background: #333;"></div>
+                    <div style="flex:1; height:100px; background:#ccc;"></div>
+                </div>
+            </div>
+            
+        </section>
+    </div>
+</body>
+</html>
